@@ -1,14 +1,11 @@
 class CreateOrderDetails < ActiveRecord::Migration[6.1]
   def change
     create_table :order_details do |t|
-      t.integer :id
-      t.integer :item_id
-      t.integer :order_id
-      t.integer :price_tax
-      t.integer :amount
-      t.integer :status
-      t.datetime :created_at
-      t.datetime :updated_at
+      t.integer :item_id, null: false
+      t.integer :order_id, null: false
+      t.integer :price_tax, null: false
+      t.integer :amount, null: false
+      t.integer :status, null: false, default: 0
       t.timestamps
     end
   end
