@@ -1,19 +1,20 @@
 class Admin::OrdersController < ApplicationController
+
   def index
-  end 
-  
+  end
+
   def show
-  end 
-  
+  end
+
   def edit
   end
-  
+
   def update
   end
-  
+
   def destroy
-  end 
-  
+  end
+
   def confirm
       @order = Order.new(order_params)
       @address = Address.find(params[:order][:address_id])
@@ -26,5 +27,5 @@ class Admin::OrdersController < ApplicationController
 
   def order_params
   params.require(:order).permit(:payment_method, :postal_code, :address, :name)
-  end 
+  end
 end
