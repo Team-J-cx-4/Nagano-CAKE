@@ -1,4 +1,6 @@
 class Admin::OrderDetailsController < ApplicationController
+  belongs_to :order
+  belongs_to :item
 
   def index
   end
