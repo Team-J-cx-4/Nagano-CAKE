@@ -1,12 +1,18 @@
 class Public::OrdersController < ApplicationController
 
   def new
+    @orders = Order.new
+    @addresses = Address.all
   end
 
   def index
+    @orders = Order.all
+    @order = Order.new
+
   end
 
   def show
+    @orders = Order.all
   end
 
   def create

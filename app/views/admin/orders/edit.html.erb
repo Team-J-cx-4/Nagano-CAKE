@@ -2,3 +2,25 @@
 <h3>注文情報</h3>
 <h3>請求情報</h3>
 <h3>注文内容</h3>
+<table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+      <%= form_with model: @book, url:book_path(@book.id), method: :patch do |f| %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+  <div class="form-group">
+  <%= f.submit 'Update Book' %></div>
+<% end %>
+<div>
+<%= link_to "Show" ,book_path(@book.id) %>
+<a class="back" href="/books">Back</a>
+</div>
