@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     skip: [:registrations, :passwords] ,
     controllers: {sessions: "admin/sessions"}
 
-# piblic側ルーティング
+# public側ルーティング
   root to: 'public/homes#top'
   get '/about', to: 'homes#about'
   get '/customers/quit', to: 'customers#quit'
