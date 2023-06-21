@@ -21,9 +21,9 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :new, :index, :create]
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   resources :customers, only: [:show, :update, :edit]
-    get 'customers/information', to: 'customers#show'
-    get 'customers/information/edit', to: 'customers#edit'
-    patch 'customers/information', to: 'customers#update'
+    get '/customers/information', to: 'customers#show'
+    get '/customers/information/edit', to: 'customers#edit'
+    patch '/customers/information', to: 'customers#update'
   resources :sessions, only: [:new, :create, :destroy]
 
 # admin側ルーティング
