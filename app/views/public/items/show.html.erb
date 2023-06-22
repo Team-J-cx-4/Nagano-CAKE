@@ -1,0 +1,35 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-4">
+      <%= image_tag @item.image, size: "300x300" %>
+    </div>
+    <div class="col-8">
+      <div class="row">
+  　　    <div class="col-12">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><strong><%= @item.name %></strong></td>
+              </tr>
+              <tr>
+                <td><%= @item.introduction %></td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>
+                    ¥<%= (@item.price*1.1).floor.to_s(:delimited) %>
+                  </strong>
+                  （税込）
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <tr>
+            <%= f.select :amount, [['1個', 1], ['2個', 2], ['3個', 3], ['4個', 4], ['5個', 5], ['6個', 6], ['7個', 7], ['8個', 8], ['9個', 9]], {:prompt => "個数選択"} %>
+            <%= link_to "カートに入れる",edit_admin_item_path(@item), class: 'btn btn-success' %>
+          </tr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
