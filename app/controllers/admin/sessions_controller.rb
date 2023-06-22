@@ -5,9 +5,18 @@ class Admin::SessionsController < ApplicationController
   end
 
   def create
+    @admin= login(params[:email], params[:password])
+    if @admin
+      redirect_to admin_root_path, success: 'ログインしました'
+    else
+      flash.now[:danger] = 'ログインに失敗しました'
+      render :new
+    end
   end
 
   def destroy
+    logout
+    redirect_to admin_login_path, success: 'ログアウトしました'
   end
 
   protected

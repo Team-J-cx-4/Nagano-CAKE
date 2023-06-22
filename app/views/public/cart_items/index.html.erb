@@ -1,0 +1,40 @@
+<table class="table">
+  <h2>ショッピングカート</h2>
+  <%= link_to "カートを空にする", cart_items_all_destroy_pash, method :delete, class: "pull-right btn btn-danger" %>
+    <thead>
+      <tr>商品名</tr>
+      <tr>単価(税込)</tr>
+      <tr>数量</tr>
+      <tr>小計</tr>
+      <tr></tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= image_tag cart_item.get_profile_image(100,100) %></td>
+          <td><%= cart_item.item.name %></td>
+          <td>
+            <%= form_with url:items_path do |form| %>
+              <%= f.number_field :quantity, min:1, max:100, step:1 %>
+              <%= f.submit "変更", class: "btn btn-primary" %>
+            <% end %>
+          </td>
+          <td><%= cart_item.item.with_tax_price %></td>
+          <td><%= cart_item.subtotal %></td>
+          <tb><%= link_to "削除", cart_delete_users_path(customers_cart_item.id), method: :delete, class: "btn btn-danger" %></tb>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+<div>
+  <tr>
+    <tb><%= link_to "買い物を続ける", items_path, class: "btn btn-primary" %></tb>
+  </tr>
+  <tr>
+    <td>合計金額</td>
+    <td><% @billing_price +=  cart_item.subtotal %></td>
+  </tr>
+</div>
+<div>
+  <%= link_to "情報入力に進む", orders_pash, class: "btn btn-success" %>
+</div>
