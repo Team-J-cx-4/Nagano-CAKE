@@ -13,9 +13,19 @@ class Public::OrdersController < ApplicationController
 
   def show
     @orders = Order.all
+    @order = Order.find(params[:id])
+    @customer = @order.customer
+
+    if params[:id] == "confirm"
+    redirect_to new_order_path
+    else
+      @order = Order.find(params[:id])
+    end
   end
 
   def create
+    order = Order.new(order_params)
+    order.customer_id = current_customer.id
   end
 
   def log
