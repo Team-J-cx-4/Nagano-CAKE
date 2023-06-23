@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
 
- devise_for :customers, controllers: {
-   registrations: "public/registrations",
-   sessions: 'public/sessions'
- }
- 
+  devise_for :customers, controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+
   devise_for :admin,
     skip: [:registrations, :passwords] ,
     controllers: {sessions: "admin/sessions"}
-    
+
 # public側ルーティング
   scope module: :public do
     root to: 'homes#top'
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     delete '/cart_items/all_destroy', to: 'cart_items#all_destroy'
     resources :cart_items, only: [:index, :create, :update, :destroy]
   end
-  
+
 
 # admin側ルーティング
   namespace :admin do
