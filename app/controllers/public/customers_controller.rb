@@ -1,7 +1,6 @@
 class Public::CustomersController < ApplicationController
 
   def show
-    @customer = Customer.new(customer_params)
     
   end
 
