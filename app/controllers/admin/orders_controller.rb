@@ -3,17 +3,26 @@ class Admin::OrdersController < ApplicationController
   has_many :order_details
 
   def index
+    @orders = Order.all
+    @order = Order.new
   end
 
   def show
     @item = Item.find(params[:item_id])
     @order = @item.order.new
+    if params[:id] == "confirm"
+    redirect_to new_order_path
+    else
+      @order = Order.find(params[:id])
+    end
   end
 
   def edit
   end
 
   def update
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
   end
 
   def destroy
