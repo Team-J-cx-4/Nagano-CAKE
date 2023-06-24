@@ -1,14 +1,15 @@
 <div class='container'>
+  <div class="p-3 mb-2 col-md-2 font-weight-bold bg-light text-dark">
+    商品一覧（全<%= @items.count %>件）</div>
   <div class='row'>
-    <h2>商品一覧（全<%= @items.count %>件）</h2><br>
-    <% @items.each do |item| %>
-      <div class="col-xs-3" style="padding-right: 0px; padding-left: 0px; margin: 10px 0;">
-        <%= link_to item_path(item.id) ,style: "color: black;", data: {"turbolinks" => false} do %>
-          <%= image_tag item.image, size: "100x100" %><br>
-          <%= item.name %><br>
-          ¥<%= item.price.to_s(:delimited) %>
-        <% end %>
-      </div>
-    <% end %>
+  <% @items.each do |item| %>
+    <div class="col-xs-3 m-3">
+      <%= link_to item_path(item.id) ,style: "color: black;", data: {"turbolinks" => false} do %>
+        <%= image_tag item.image, size: "250x200" %><br>
+        <%= item.name %><br>
+        ¥<%= item.price.to_s(:delimited) %>
+      <% end %>
+    </div>
+  <% end %>
   </div>
 </div>
