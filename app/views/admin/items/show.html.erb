@@ -1,5 +1,8 @@
+<div>
+  <%= flash[:notice_update] %>
+</div>
 <div class='container'>
-  <div class="p-3 mb-2 bg-light text-dark">商品詳細</div><br>
+  <div class="p-3 mb-2 col-md-2 font-weight-bold bg-light text-dark">商品詳細</div><br>
   <div class='row'>
     <div class="col-4">
       <%= image_tag @item.image, size: "300x300" %>
