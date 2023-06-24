@@ -8,12 +8,12 @@ class Public::OrdersController < ApplicationController
   def index
     @orders = Order.all
     @order = Order.new
-
   end
 
   def show
     @orders = Order.all
     @order = Order.find(params[:id])
+    @order_details = OrderDetail.where(order_id: @order.id)
     @customer = @order.customer
 
     if params[:id] == "confirm"
@@ -24,8 +24,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    order = Order.new(order_params)
-    order.customer_id = current_customer.id
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
   end
 
   def log
