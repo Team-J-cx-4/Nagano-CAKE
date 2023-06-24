@@ -32,7 +32,6 @@
               ログアウト
             <% end %>
           </li>
-
         <% elsif admin_signed_in? %>
           <li class="ml-4">
             <%= link_to admin_items_path,class: 'nav-link text-light' do %>
@@ -59,7 +58,6 @@
               ログアウト
             <% end %>
           </li>
-
         <% else %>
           <li class="ml-4">
             <%= link_to about_path,class: 'nav-link text-light' do %>
