@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-8 col-lg5 px-sm-0">
-        <%= form_with model: @admin, url: session_path(resource_name), local: true do |f| %>
+        <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
           <div class="field">
             <%= f.label :email,"メールアドレス" %><br>
             <%= f.email_field :email, autocomplete: "email" %>
@@ -20,3 +20,4 @@
     </div>
   </div>
 </main>
+<!--email:aaa@aaa,password:aaaaaa-->

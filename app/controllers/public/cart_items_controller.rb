@@ -1,7 +1,7 @@
 class Public::CartItemsController < ApplicationController
 
   def index
-    @cart_item.customer_id = current_customer.id
+    @cart_item.customer_id = current_customer
   end
 
   def create
@@ -26,6 +26,11 @@ class Public::CartItemsController < ApplicationController
     @cart_items.destroy_all
     flash[:alert] = "カートの商品を全て削除しました"
     redirect_to cart_items_path
+  end
+
+  private
+  def cart_item_params
+      params.require(:cart_item).permit(:item_id, :amount)
   end
 
 end
