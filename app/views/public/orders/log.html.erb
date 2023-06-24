@@ -2,10 +2,93 @@
   <div class="row">
     <div class="col">
 <h1>注文情報確認</h1>
- <%= form_with model: @order, url: confirm_orders_path, local: true do |f| %>
-      <h5><p class="font-weight-bold">支払い方法</p></h5>
-        <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
-        <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
-        <br>
-        <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
-        <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
+  <div class="row">
+    <div class="col-8">
+
+      <table class="table table-bordered">
+        <thead>
+          <th>商品</th>
+          <th width="120">単価(税込)</th>
+          <th width="100">数量</th>
+          <th width="100">小計</th>
+        </thead>
+        <tbody>
+          <% sum = 0 %>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td>
+                <div class="d-inline-flex"><%= attachment_image_tag cart_item.item, :item_image, :fill, 80, 80, format: 'jpeg', fallback: "no_image.jpg" %></div>
+                <div class="d-inline-flex align-top"><%= cart_item.item.name %></div>
+              </td>
+              <td><%= cart_item.item.tax_include.to_s(:delimited) %></td>
+              <td><%= cart_item.quantity %></td>
+              <td><%= (cart_item.item.tax_include* cart_item.quantity).to_s(:delimited) %></td>
+              <% sum += cart_item.subtotal %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-4">
+      <table class="table table-bordered">
+        <tr>
+          <th>商品合計</th>
+          <td><%= sum.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td><%= 800 %></td>
+        </tr>
+        <tr>
+          <th>請求金額</th>
+          <td><%= (sum+800).to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <table>
+        <tbody>
+          <tr>
+            <td class="col-4">支払方法</td>
+            <td class="col-9"><%= @order.payment_method %></td>
+          </tr>
+          <tr>
+            <td class="col-4 align-top">お届け先</td>
+            <% if @shipping_sel == "0" %>
+              <td class="col-9"><%= Customer.find(current_customer.id).join_address %></br>
+              <%= Customer.find(current_customer.id).join_name %></td>
+            <% else %>
+              <td class="col-9"><%= "〒 #{@shipping_address.postcode} #{@shipping_address.address} #{@shipping_address.address_name}" %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center mt-4">
+
+    <%= form_with model:@order,  url:orders_path, local:true do |f| %>
+
+      <%= f.hidden_field :payment_method %>
+      <%= f.hidden_field :shipping_sel %>
+      <%= f.hidden_field :shipping_address_id %>
+      <%=f.fields_for @shipping_address do |i| %>
+        <%= i.hidden_field :postcode %>
+        <%= i.hidden_field :address %>
+        <%= i.hidden_field :address_name %>
+      <% end %>
+      <div class="actions">
+        <%= f.submit "注文を確定する",class: "btn-flat-success" %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+
