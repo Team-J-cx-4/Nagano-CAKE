@@ -1,27 +1,34 @@
-class Admin::SessionsController < ApplicationController
-  before_action :configure_permitted_parameters, if: :devise_controller?
+class Admin::SessionsController < Devise::SessionsController
 
-  def new
+  def after_sign_in_path_for(resource)
+    admin_path
   end
 
-  def create
-    @admin= login(params[:email], params[:password])
-    if @admin
-      redirect_to admin_root_path, success: 'ログインしました'
-    else
-      flash.now[:danger] = 'ログインに失敗しました'
-      render :new
-    end
+  def after_sign_out_path_for(resource)
+    admin_session_path
   end
+  # before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def destroy
-    logout
-    redirect_to admin_login_path, success: 'ログアウトしました'
-  end
+  # def new
+  # end
 
-  protected
+  # # def create
+  # #   @admin= sign_in(params[:email], params[:password])
+  # #   if @admin
+  # #     redirect_to admin_path, success: 'ログインしました'
+  # #   else
+  # #     flash.now[:danger] = 'ログインに失敗しました'
+  # #     render :new
+  # #   end
+  # # end
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
-  end
+  # def destroy
+  #   redirect_to destroy_admin_session_path, success: 'ログアウトしました'
+  # end
+
+  # protected
+
+  # def configure_permitted_parameters
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
+  # end
 end

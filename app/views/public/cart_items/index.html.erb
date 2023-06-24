@@ -1,6 +1,6 @@
 <table class="table">
   <h2>ショッピングカート</h2>
-  <%= link_to "カートを空にする", cart_items_all_destroy_pash, method :delete, class: "pull-right btn btn-danger" %>
+  <%= link_to "カートを空にする", cart_items_all_destroy_path, method: :delete, class: "pull-right btn btn-danger" %>
     <thead>
       <tr>商品名</tr>
       <tr>単価(税込)</tr>
@@ -9,7 +9,7 @@
       <tr></tr>
     </thead>
     <tbody>
-      <% @cart_items.each do |cart_item| %>
+      <% @cart_item.each do |cart_item| %>
         <tr>
           <td><%= image_tag cart_item.get_profile_image(100,100) %></td>
           <td><%= cart_item.item.name %></td>
