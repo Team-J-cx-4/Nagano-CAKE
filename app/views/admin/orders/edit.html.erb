@@ -1,26 +1,36 @@
-<h1>注文履歴詳細</h1>
-<h3>注文情報</h3>
-<h3>請求情報</h3>
-<h3>注文内容</h3>
-<table class='table table-hover table-inverse'>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Opinion</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-      <%= form_with model: @book, url:book_path(@book.id), method: :patch do |f| %>
-  <h4>Title</h4>
-  <%= f.text_field :title %>
-  <h4>Opinion</h4>
-  <%= f.text_area :body %>
-  <div class="form-group">
-  <%= f.submit 'Update Book' %></div>
-<% end %>
-<div>
-<%= link_to "Show" ,book_path(@book.id) %>
-<a class="back" href="/books">Back</a>
+  <h2>注文履歴詳細</h2>
+  <div style="margin-top: 50px;">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">注文情報</th>
+          <td><%=link_to @order.client.first_name + @order.client.last_name , admins_client_path(@order.client.id) %></td>
+        </tr>
+        <tr>
+          <th scope="row">請求情報</th>
+          <td>
+            <p><%= @order.postal_code %><%= @order.street_address %></p>
+            <p><%= @order.receive_name %></p>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">注文内容</th>
+          <td><%= @order.payment %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+<div class="row">
+  <div class="col-xs-8"style="margin-top: 50px;">
+    <table class="table table-bordered">
+      <thead>
+        <tr class="table-head" style="background-color:#F5F5F5;">
+          <th scope="col">商品名</th>
+          <th scope="col">単価（税込）</th>
+          <th scope="col">数量</th>
+          <th scope="col">小計</th>
+        </tr>
+      </thead>
+      <tbody>
