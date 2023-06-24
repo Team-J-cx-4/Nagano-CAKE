@@ -8,9 +8,9 @@ class Admin::GenresController < ApplicationController
   def create
     @genre = Genre.new(genre_params)
     if @genre.save
+      flash[:genre_create] = "ジャンルを追加しました"
       redirect_to admin_genres_path
     else
-      flash[:genre_created_error] = "ジャンル名を入力してください"
       redirect_back fallback_location: root_path
     end
   end

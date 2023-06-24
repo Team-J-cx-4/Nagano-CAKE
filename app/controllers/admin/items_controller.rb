@@ -11,9 +11,9 @@ class Admin::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
+      flash[:item_create] = "商品を追加しました"
       redirect_to admin_items_path
     else
-      flash[:genre_created_error] = "ジャンル名を入力してください"
       redirect_back fallback_location: root_path
     end
   end
