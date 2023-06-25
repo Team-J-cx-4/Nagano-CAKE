@@ -1,1 +1,31 @@
-<h2>会員一覧</h2>
+<div class='container'>
+  <div class='row'>
+    <div class="p-3 mb-2 bg-light text-dark">会員一覧</div>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>会員ID</th>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!----コントローラまだ、仮の引数を入れてコメントアウト中>
+        <!--<% @customers.each do |customer| %>-->
+          <tr>
+            <td><%= customer.id %></td>
+            <td><%= link_to customer.last_name + " " + customer.first_name,admin_customer_path(customer) %></td>
+            <td><%= customer.email %></td>
+            <td><% if customer.is_stated == true %>
+              <strong class="text-success">有効</strong>
+            <% else %>
+              <strong class="text-secondary">無効</strong>
+            <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
