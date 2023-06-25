@@ -37,9 +37,9 @@ class Public::AddressesController < ApplicationController
     @address.delete
     redirect_to addresses_path, notice: "配送先の削除に成功しました"
   end
-  
+
   private
-  
+
   def address_params
     params.require(:address).permit(:post_code, :address, :addressed_name, :customer_id)
   end
