@@ -11,4 +11,9 @@ class Order < ApplicationRecord
     end
   end
 
+  def subtotal
+    item.add_tax_price * amount
+  end
+  
+
 end
