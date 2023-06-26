@@ -1,6 +1,4 @@
 class Admin::OrdersController < ApplicationController
-  belongs_to :menber
-  has_many :order_details
 
   def index
     @orders = Order.all
