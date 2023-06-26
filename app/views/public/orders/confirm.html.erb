@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-<h1>注文情報確認</h1>
+ <div class="p-3 mb-2 bg-light text-dark">注文情報確認</div>
   <div class="row">
     <div class="col-8">
 
@@ -72,8 +72,7 @@
 
   <div class="row d-flex justify-content-center mt-4">
 
-    <%= form_with model:@order,  url:orders_path, local:true do |f| %>
-
+    <%= form_with model: @order, url :orders_path, local:true do |f| %>
       <%= f.hidden_field :payment_method %>
       <%= f.hidden_field :billing_price, :value => sum+800 %>
       <%= f.hidden_field :post_code, :value => @order.post_code %>
@@ -82,9 +81,7 @@
       <div class="actions">
         <%= f.submit "注文を確定する", class: "btn btn-success" %>
       </div>
-
     <% end %>
-
   </div>
 </div>
 

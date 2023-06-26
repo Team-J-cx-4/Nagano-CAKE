@@ -6,7 +6,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = Order.where(customer_id:current_customer)
     @order = Order.new
   end
 
@@ -26,7 +26,9 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
+
     @order.postage = 800
+
     @order.save
     @cart_items = current_customer.cart_items.all
 
@@ -51,7 +53,7 @@ class Public::OrdersController < ApplicationController
      cart_items = current_customer.cart_items
      if cart_items.blank?
 
-　　　注文完了画面に遷移させる
+　　# 　注文完了画面に遷移させる
       redirect_to cart_items_path
      end
     end
@@ -73,5 +75,6 @@ class Public::OrdersController < ApplicationController
   def order_params
   params.require(:order).permit(:payment_method, :post_code, :address, :adressed_name, :billing_price)
   end
+  
 
 end
