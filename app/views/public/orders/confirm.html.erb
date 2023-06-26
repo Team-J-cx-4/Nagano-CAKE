@@ -17,12 +17,12 @@
           <% @cart_items.each do |cart_item| %>
             <tr>
               <td>
-                <div class="d-inline-flex"><%= attachment_image_tag cart_item.item, :item_image, :fill, 80, 80, format: 'jpeg', fallback: "no_image.jpg" %></div>
+                <div class="d-inline-flex"><%= image_tag cart_item.item.image, size:'50x50' %></div>
                 <div class="d-inline-flex align-top"><%= cart_item.item.name %></div>
               </td>
-              <td><%= cart_item.item.tax_include.to_s(:delimited) %></td>
-              <td><%= cart_item.quantity %></td>
-              <td><%= (cart_item.item.tax_include* cart_item.quantity).to_s(:delimited) %></td>
+              <td><%= cart_item.item.price * 1.1 %></td>
+              <td><%= cart_item.amount %></td>
+              <td><%= cart_item.item.price * 1.1* cart_item.amount %></td>
               <% sum += cart_item.subtotal %>
             </tr>
           <% end %>
@@ -62,7 +62,7 @@
               <td class="col-9"><%= Customer.find(current_customer.id).join_address %></br>
               <%= Customer.find(current_customer.id).join_name %></td>
             <% else %>
-              <td class="col-9"><%= "〒 #{@shipping_address.postcode} #{@shipping_address.address} #{@shipping_address.address_name}" %></td>
+              <td class="col-9"><%= "〒 #{@order.post_code} #{@order.address} #{@order.adressed_name}" %></td>
             <% end %>
           </tr>
         </tbody>
@@ -77,13 +77,12 @@
       <%= f.hidden_field :payment_method %>
       <%= f.hidden_field :shipping_sel %>
       <%= f.hidden_field :shipping_address_id %>
-      <%=f.fields_for @shipping_address do |i| %>
-        <%= i.hidden_field :postcode %>
-        <%= i.hidden_field :address %>
-        <%= i.hidden_field :address_name %>
-      <% end %>
+
+        <%= f.hidden_field :postcode %>
+        <%= f.hidden_field :address %>
+        <%= f.hidden_field :adressed_name %>
       <div class="actions">
-        <%= f.submit "注文を確定する",class: "btn-flat-success" %>
+        <%= f.submit "注文を確定する", class: "btn-flat-success" %>
       </div>
 
     <% end %>

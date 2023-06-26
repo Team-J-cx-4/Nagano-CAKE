@@ -4,7 +4,7 @@ Rails.application.routes.draw do
  #  registrations: "public/registrations",
  # sessions: 'public/sessions'
  # }
-  
+
  devise_for :customers, controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     get '/customers/quit', to: 'customers#quit'
     patch '/customers/out', to: 'customers#out'
     get '/orders/thanx', to: 'orders#thanx'
-    post '/orders/log', to: 'orders#log'
+    post '/orders/confirm', to: 'orders#confirm'
     resources :items, only: [:show, :index]
     resources :orders, only: [:show, :new, :index, :create]
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
