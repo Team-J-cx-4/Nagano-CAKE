@@ -48,7 +48,7 @@ class Public::OrdersController < ApplicationController
 
 
     def cartitem_nill
-     cart_items = current_end_user.cart_items
+     cart_items = current_customer.cart_items
      if cart_items.blank?
 
 　　　注文完了画面に遷移させる
