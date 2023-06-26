@@ -1,0 +1,99 @@
+<div class="container">
+
+ <div class="p-3 mb-2 col-md-2 font-weight-bold bg-light text-dark"><%= @customer.last_name %>さんの会員詳細</div>
+
+  <%= form_with model: @customer, url: admin_customers_path do |f| %>
+
+   <table>
+
+    <tr>
+
+    </tr>
+
+   </table>
+
+  <div class="col-5">
+
+   <table class="table table-bordered">
+
+    <tbody>
+
+     <tr>
+
+      <td class="bg-light text-dark">氏名</td>
+
+      <td><%= @customer.last_name %><%= @customer.first_name %></td>
+
+     </tr>
+
+     <tr>
+
+      <td class="bg-light text-dark">カナ</td>
+
+      <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+
+     </tr>
+
+     <tr>
+
+      <td class="bg-light text-dark">郵便番号</td>
+
+      <td><%= @customer.post_code %></td>
+
+     </tr>
+
+     <tr>
+
+      <td class="bg-light text-dark">住所</td>
+
+      <td><%= @customer.address %></td>
+
+     </tr>
+
+     <tr>
+
+      <td class="bg-light text-dark">電話番号</td>
+
+      <td><%= @customer.phone_number %></td>
+
+     </tr>
+
+     <tr>
+
+      <td class="bg-light text-dark">メールアドレス</td>
+
+      <td><%= @customer.email %></td>
+
+     </tr>
+
+     <tr>
+
+      <td class="bg-light text-dark">会員ステータス</td>
+
+      <td>
+        <td><% if customer.is_stated == true %>
+          <strong class="text-success">有効</strong>
+        <% else %>
+          <strong class="text-secondary">無効</strong>
+        <% end %>
+      </td>
+
+     </tr>
+
+    </tbody>
+
+   </table>
+
+  </div>
+
+  <table>
+
+    <td><%= link_to "編集する", edit_admin_customer, class: 'btn ml-5 mb-3 btn-success' %></td>
+
+    <td><%= link_to "一覧を見る", admin_path, class: 'btn ml-5 btn-primary' %></td>
+
+
+  </table>
+  <% end %>
+
+</div>
