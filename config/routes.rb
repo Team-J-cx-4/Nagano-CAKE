@@ -10,9 +10,11 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
-  devise_for :admin,
+ devise_for :admin,
     skip: [:registrations, :passwords] ,
     controllers: {sessions: "admin/sessions"}
+
+  get '/search', to: 'searchs#search'
 
 # public側ルーティング
   scope module: :public do
