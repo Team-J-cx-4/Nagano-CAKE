@@ -11,13 +11,12 @@
         </tr>
       </thead>
       <tbody>
-        <!----コントローラまだ、仮の引数を入れてコメントアウト中>
-        <!--<% @customers.each do |customer| %>-->
+        <% @customers.each do |customer| %>
           <tr>
             <td><%= customer.id %></td>
             <td><%= link_to customer.last_name + " " + customer.first_name,admin_customer_path(customer) %></td>
             <td><%= customer.email %></td>
-            <td><% if customer.is_stated == true %>
+            <td><% if customer.is_deleted == false %>
               <strong class="text-success">有効</strong>
             <% else %>
               <strong class="text-secondary">無効</strong>
