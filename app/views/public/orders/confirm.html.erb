@@ -69,7 +69,6 @@
       </div>
 
       <div class="row d-flex justify-content-center mt-4">
-
       <%= form_with model: @order, url: orders_path, local:true do |f| %>
         <%= f.hidden_field :payment_method %>
         <%= f.hidden_field :billing_price, :value => sum+800 %>
