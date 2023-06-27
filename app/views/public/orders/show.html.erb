@@ -55,7 +55,7 @@
           <% @order.order_details.each do |item| %>
           <tr>
             <td><%= item.item.name %></td>
-            <td><%= (item.subtotal) %> 円</td>
+            <td><%= (item.subtotal).to_s(:delimited) %> 円</td>
             <td><%= item.amount %> 個</td>
             <td><%= ((item.subtotal) * item.amount).to_s(:delimited) %> 円</td>
           </tr>
