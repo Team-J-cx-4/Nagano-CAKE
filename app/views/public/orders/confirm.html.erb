@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
- <div class="p-3 mb-2 bg-light text-dark">注文情報確認</div>
+<h1>注文情報確認</h1>
   <div class="row">
     <div class="col-8">
 
@@ -20,9 +20,9 @@
                 <div class="d-inline-flex"><%= image_tag cart_item.item.image, size:'50x50' %></div>
                 <div class="d-inline-flex align-top"><%= cart_item.item.name %></div>
               </td>
-              <td><%= (cart_item.item.price * 1.1).floor.to_s(:delimited) %></td>
+              <td><%= cart_item.item.price * 1.1 %></td>
               <td><%= cart_item.amount %></td>
-              <td><%= (cart_item.item.price * 1.1* cart_item.amount).floor.to_s(:delimited) %></td>
+              <td><%= cart_item.item.price * 1.1* cart_item.amount %></td>
               <% sum += cart_item.subtotal %>
             </tr>
           <% end %>
@@ -72,16 +72,21 @@
 
   <div class="row d-flex justify-content-center mt-4">
 
-    <%= form_with model: @order, url :orders_path, local:true do |f| %>
+    <%= form_with model:@order,  url:orders_path, local:true do |f| %>
+
       <%= f.hidden_field :payment_method %>
-      <%= f.hidden_field :billing_price, :value => sum+800 %>
-      <%= f.hidden_field :post_code, :value => @order.post_code %>
-      <%= f.hidden_field :address %>
-      <%= f.hidden_field :adressed_name %>
+      <%= f.hidden_field :shipping_sel %>
+      <%= f.hidden_field :shipping_address_id %>
+
+        <%= f.hidden_field :postcode %>
+        <%= f.hidden_field :address %>
+        <%= f.hidden_field :adressed_name %>
       <div class="actions">
-        <%= f.submit "注文を確定する", class: "btn btn-success" %>
+        <%= f.submit "注文を確定する", class: "btn-flat-success" %>
       </div>
+
     <% end %>
+
   </div>
 </div>
 
