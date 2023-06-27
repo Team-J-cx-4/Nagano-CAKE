@@ -3,6 +3,9 @@ class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
     @addresses = Address.all
+    if current_customer.cart_items.count == 0
+      redirect_to cart_items_path
+    end
   end
 
   def index
