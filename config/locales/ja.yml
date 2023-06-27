@@ -12,7 +12,7 @@ ja:
         d: "発送準備中"
         e: "発送済み"
 
-    order_details:
+    order_detail:
       status:
         a: "着手不可"
         b: "制作待ち"

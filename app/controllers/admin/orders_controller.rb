@@ -1,4 +1,5 @@
 class Admin::OrdersController < ApplicationController
+   before_action :authenticate_admin!
 
   def index
     @orders = Order.all
@@ -16,6 +17,7 @@ class Admin::OrdersController < ApplicationController
   end
 
   def edit
+    @order = Order.find(params[:id])
   end
 
   def update
