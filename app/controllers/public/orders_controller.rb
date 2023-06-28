@@ -62,25 +62,31 @@ class Public::OrdersController < ApplicationController
     end
 
   def confirm
-     @order = Order.new(order_params)
+      @order = Order.new(order_params)
       @address = Address.find(params[:order][:address_id])
       @order.post_code = @address.post_code
       @order.address = @address.address
       @order.adressed_name = @address.addressed_name
+# byebug
     if params[:order][:address_number] == "0"
       @order.post_code = current_customer.post_code
       @order.address = current_customer.address
       @order.adressed_name = current_customer.first_name + current_customer.last_name
     elsif params[:order][:address_number] == "1"
-       @address = Address.find(params[:order][:address_id])
-       @order.post_code = @address.post_code
-       @order.address = @address.address
-       @order.adressed_name = @address.addressed_name
+      @address = Address.find(params[:order][:address_id])
+      @order.post_code = @address.post_code
+      @order.address = @address.address
+      @order.adressed_name = @address.addressed_name
     elsif params[:order][:address_number] == "2"
-      @order.end_user_id = current_customer.id
+      @order.customer_id = current_customer.id
+      @address = Address.new(address_params)
+      @address.customer_id = current_customer.id
+      @address.save
+      @order.post_code = @address.post_code
+      @order.address = @address.address
+      @order.adressed_name = @address.addressed_name
     end
       @cart_items = current_customer.cart_items
-      @order_new = Order.new
       render :confirm
   end
 
@@ -91,7 +97,11 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-  params.require(:order).permit(:payment_method, :post_code, :address, :adressed_name, :billing_price)
+    params.require(:order).permit(:payment_method, :post_code, :address, :adressed_name, :billing_price)
+  end
+
+  def address_params
+    params.require(:address).permit(:post_code, :address, :addressed_name, :customer_id)
   end
 
 
