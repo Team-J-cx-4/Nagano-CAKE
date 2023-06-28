@@ -59,13 +59,28 @@ class Public::OrdersController < ApplicationController
     end
 
   def confirm
-    @Order = Order.new
-    @cart_items = current_customer.cart_items.includes(:item)
-    @order = Order.new(order_params)
-    @order.post_code = current_customer.post_code
-    @order.address = current_customer.address
-    @order.adressed_name = current_customer.first_name + current_customer.last_name
+     @order = Order.new(order_params)
+      @address = Address.find(params[:order][:address_id])
+      @order.post_code = @address.post_code
+      @order.address = @address.address
+      @order.adressed_name = @address.addressed_name
+    if params[:order][:address_number] == "0"
+      @order.post_code = current_customer.post_code
+      @order.address = current_customer.address
+      @order.adressed_name = current_customer.first_name + current_customer.last_name
+    elsif params[:order][:address_number] == "1"
+       @address = Address.find(params[:order][:address_id])
+       @order.post_code = @address.post_code
+       @order.address = @address.address
+       @order.adressed_name = @address.addressed_name
+    elsif params[:order][:address_number] == "2"
+      @order.end_user_id = current_customer.id
+    end
+      @cart_items = current_customer.cart_items
+      @order_new = Order.new
+      render :confirm
   end
+
 
   def thanx
   end

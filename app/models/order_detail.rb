@@ -32,10 +32,14 @@ class OrderDetail < ApplicationRecord
 
   after_update do
     order_details = self.order.order_details
-    if order_details.any? {|order_detail| order_detail.status == "製作中"} == true # 条件分岐：製作ステータスが1つでも製作中だったら
+    if order_details.any? {|order_detail| order_detail.status == "製作中"} == true # 条件分岐：製作ステータスが1つでも製作中にだったら
       self.order.update(status: "製作中") # 注文ステータスを製作中に変更する
     elsif order_details.all? {|order_detail| order_detail.status == "製作完了"} == true # 条件分岐：製作ステータスが全て製作完了だったら
     self.order.update(status: "発送準備中") # 注文ステータスを発送準備中に変更する
     end
   end
 end
+
+
+# enum making_status: { production_not_possible: 0, production_pending: 1, in_production: 2, production_complete: 3 }
+#making_status → 製作ステータス

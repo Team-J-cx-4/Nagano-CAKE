@@ -11,7 +11,7 @@
         <br>
         <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
         <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
-        
+
         <div>&nbsp;</div>
 
       <h5><p class="font-weight-bold">お届け先</p></h5>
@@ -20,16 +20,24 @@
           <%= f.radio_button :address_number, 0, {:checked => true} %>
           <%= f.label :address_number, "ご自身の住所" %>
           </section>
+          <div>〒<%= current_customer.post_code %>
+          <%= current_customer.address %>
+          <br>
+          <%= current_customer.last_name+ current_customer.first_name %>
+          </div>
         </div>
-        
+
         <div>
           <section class="select">
           <%= f.radio_button :address_number, 1 %>
           <%= f.label :address_number, "登録済住所から選択" %></section>
+          <div>
+            <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
+          </div>
           <br>
-          
+
         </div>
-        
+
         <div>
           <%= f.radio_button :address_number, 2 %>
           <%= f.label :address_number, "新しいお届け先" %>
