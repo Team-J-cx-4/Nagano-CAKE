@@ -52,7 +52,7 @@
             <tbody>
               <tr>
                 <td class="col-4">支払方法</td>
-                <td class="col-9"><%= @order.payment_method %></td>
+                <td class="col-9"><%= @order.payment_method_i18n %></td>
               </tr>
               <tr>
                 <td class="col-4 align-top">お届け先</td>
@@ -64,7 +64,6 @@
       </div>
 
       <div class="row d-flex justify-content-center mt-4">
-
       <%= form_with model: @order, url: orders_path, local:true do |f| %>
         <%= f.hidden_field :payment_method %>
         <%= f.hidden_field :billing_price, :value => sum+800 %>

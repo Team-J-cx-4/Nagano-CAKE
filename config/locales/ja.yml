@@ -1,6 +1,9 @@
 ja:
-  enums:
+  time:
+    formats:
+    default: "%Y/%m/%d %H:%M:%S"
 
+  enums:
     order:
       payment_method:
         credit_card: "クレジットカード"
