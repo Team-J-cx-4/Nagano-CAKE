@@ -38,7 +38,7 @@ class Admin::OrderDetailsController < ApplicationController
         order.orders.each do |p|
           p.update(order_status: 'b')
         end
-        flash[:info] = "製作ステータスが「製作待ち」に更新されました"
+        # flash[:info] = "製作ステータスが「製作待ち」に更新されました"
       end
     end
 
