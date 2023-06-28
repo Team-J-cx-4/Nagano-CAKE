@@ -32,7 +32,7 @@ class Admin::OrderDetailsController < ApplicationController
 		redirect_to edit_admin_order_path(@order_detail.order.id)
   end
 
- # 注文ステータスが「入金確認」になったら紐づく製作ステータス全てを「製作待ち」に自動更新
+  # 注文ステータスが「入金確認」になったら紐づく製作ステータス全てを「製作待ち」に自動更新
     def status_is_deposited?(order)
       if order.status_before_type_cast == 'b'
         order.orders.each do |p|
@@ -55,7 +55,7 @@ class Admin::OrderDetailsController < ApplicationController
   # 製作ステータスが一つでも「製作中」になったら注文ステータスが「製作中」に自動更新
     def status_is_in_production?(order)
       if order.status_before_type_cast == 'c'
-        order.order.update(status: 'c')
+        # order.order.update(status: 'c')
         flash[:success] = "注文ステータスが「製作中」に更新されました"
       end
     end
