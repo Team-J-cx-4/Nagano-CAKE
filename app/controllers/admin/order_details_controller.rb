@@ -12,7 +12,7 @@ class Admin::OrderDetailsController < ApplicationController
 
   def update
     @order_detail = OrderDetail.find(params[:id])
-    @order_details = OrderDetail.where(order_id: params[:id])
+    @order_details = @order_detail.order.order_details
     @order_detail.update(order_detail_params)
     is_updated = true
     case @order_detail.status
