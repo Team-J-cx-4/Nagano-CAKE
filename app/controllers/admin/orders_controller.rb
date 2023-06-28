@@ -21,9 +21,22 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
+    @order = Order.find(params[:id])
+    @order_details = OrderDetail.where(order_id: params[:id])
+    if @order.update(order_params)
+      @order_details.update_all(status: 'a') if @order.status == 'a' #"payment_confirmation"
+     redirect_to edit_admin_order_path(@order.id)
+    end
   end
+
+#   @order = Order.find(params[:id])
+#   @order_details = OrderDetail.where(order_id: params[:id])
+#   if @order.update(order_params)
+#     @order_details.update_all(making_status: 1) if @order.status == "payment_confirmation"
+#     ## ①注文ステータスが「入金確認」とき、製作ステータスを全て「製作待ち」に更新する
+#   end
+#   redirect_to admin_order_path(@order)
+# end
 
   def destroy
   end
@@ -54,6 +67,6 @@ class Admin::OrdersController < ApplicationController
   private
 
   def order_params
-  params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+  params.require(:order).permit(:payment_method, :postal_code, :address, :name, :status)
   end
 end

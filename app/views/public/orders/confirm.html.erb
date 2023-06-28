@@ -56,12 +56,7 @@
               </tr>
               <tr>
                 <td class="col-4 align-top">お届け先</td>
-                <% if @shipping_sel == "0" %>
-                  <td class="col-9"><%= Customer.find(current_customer.id).join_address %></br>
-                  <%= Customer.find(current_customer.id).join_name %></td>
-                <% else %>
                   <td class="col-9"><%= "〒 #{@order.post_code} #{@order.address} #{@order.adressed_name}" %></td>
-                <% end %>
               </tr>
             </tbody>
           </table>
